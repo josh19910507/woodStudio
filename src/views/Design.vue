@@ -20,9 +20,12 @@
 
           <div class="carousel-wrapper">
             <div
-              class="carousel-track"
-              :style="{ transform: `translateX(-${currentIndex * slideWidth}%)` }"
-            >
+  class="carousel-track"
+  :style="{
+    '--items-per-view': itemsPerView,
+    transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
+  }"
+>
               <div
                 v-for="product in products"
                 :key="product.id"
@@ -134,7 +137,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick, reactive } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 
 const currentIndex = ref(0)
 const itemsPerView = ref(3)
@@ -145,74 +148,44 @@ const lightboxOpen = ref(false)
 const currentProduct = ref(null)
 const lightboxImageIndex = ref(0)
 
-// 產品數據 - 每個產品都有多張圖片
+// 產品數據
 const products = ref([
   {
     id: 1,
     name: '現代簡約風',
     shortDesc: '以淺色木質與中性色調營造開闊空間感。',
-    images: [
-      '現代簡約風_1.jpg',
-      '現代簡約風_2.jpg',
-      '現代簡約風_3.jpg',
-    ],
+    images: ['現代簡約風_1.jpg','現代簡約風_2.jpg','現代簡約風_3.jpg'],
     currentImageIndex: 0,
   },
   {
     id: 2,
     name: '無印簡約風',
-    shortDesc: '不到30歲的年輕首購族喜歡無印簡約木質的居家特色，在有限預算下，設計師將預算集中在收納機能上，從玄關開始即配置懸空系統櫃體做出延伸，使視覺空間更為寬敞；並將老宅舊有儲藏室打掉，改造為開放式餐廳空間，將餐邊收納櫃以純白色調櫃體收整於牆，並搭配方型木質餐桌，塑造溫暖和諧的生活畫面。',
-    images: [
-      '無印簡約風_1.jpg',
-      '無印簡約風_2.jpg',
-      '無印簡約風_3.jpg',
-    ],
+    shortDesc: '不到30歲的年輕首購族喜歡無印簡約木質的居家特色…',
+    images: ['無印簡約風_1.jpg','無印簡約風_2.jpg','無印簡約風_3.jpg'],
     currentImageIndex: 0,
   },
   {
     id: 3,
     name: '簡約輕工業風',
-    shortDesc: '為打造屋主喜歡的自在感生活環境，色彩配置上以明亮耐看的白與灰為主，適度的更動格局，釋放部份私人領域並搭配固定拉門，將最好的採光留給需要休息紓壓的臥室，並延伸到客、餐廳，打造無限延伸的活動空間，使長型老宅翻新後也能擁有寬敞的通透感，並於客廳牆面使用斯曼特漆料清水模電視牆搭配低調灰格柵，玄關以純白色調櫃體收整於牆。',
-    images: [
-      '簡約輕工業風_1.jpg',
-      '簡約輕工業風_2.jpg',
-      '簡約輕工業風_3.jpg'
-    ],
+    shortDesc: '為打造屋主喜歡的自在感生活環境…',
+    images: ['簡約輕工業風_1.jpg','簡約輕工業風_2.jpg','簡約輕工業風_3.jpg'],
     currentImageIndex: 0,
   }
 ])
 
 const slideWidth = computed(() => 100 / itemsPerView.value)
-const maxIndex = computed(() =>
-  Math.max(0, products.value.length - itemsPerView.value)
-)
+const maxIndex = computed(() => Math.max(0, products.value.length - itemsPerView.value))
 const totalSlides = computed(() => maxIndex.value + 1)
 
 // 主輪播控制
-function nextSlide() {
-  if (currentIndex.value < maxIndex.value) currentIndex.value++
-}
-function prevSlide() {
-  if (currentIndex.value > 0) currentIndex.value--
-}
-function goToSlide(index) {
-  currentIndex.value = index
-}
+function nextSlide() { if (currentIndex.value < maxIndex.value) currentIndex.value++ }
+function prevSlide() { if (currentIndex.value > 0) currentIndex.value-- }
+function goToSlide(index) { currentIndex.value = index }
 
 // 卡片內圖片輪播
-function nextCardImage(product) {
-  if (product.currentImageIndex < product.images.length - 1) {
-    product.currentImageIndex++
-  }
-}
-function prevCardImage(product) {
-  if (product.currentImageIndex > 0) {
-    product.currentImageIndex--
-  }
-}
-function setCardImage(product, index) {
-  product.currentImageIndex = index
-}
+function nextCardImage(product) { if (product.currentImageIndex < product.images.length - 1) product.currentImageIndex++ }
+function prevCardImage(product) { if (product.currentImageIndex > 0) product.currentImageIndex-- }
+function setCardImage(product, index) { product.currentImageIndex = index }
 
 // Lightbox 控制
 function openLightbox(product) {
@@ -226,16 +199,8 @@ function closeLightbox() {
   currentProduct.value = null
   document.body.style.overflow = ''
 }
-function nextLightboxImage() {
-  if (lightboxImageIndex.value < currentProduct.value.images.length - 1) {
-    lightboxImageIndex.value++
-  }
-}
-function prevLightboxImage() {
-  if (lightboxImageIndex.value > 0) {
-    lightboxImageIndex.value--
-  }
-}
+function nextLightboxImage() { if (lightboxImageIndex.value < currentProduct.value.images.length - 1) lightboxImageIndex.value++ }
+function prevLightboxImage() { if (lightboxImageIndex.value > 0) lightboxImageIndex.value-- }
 
 // 響應式處理
 function updateItemsPerView() {
@@ -243,9 +208,10 @@ function updateItemsPerView() {
   else if (window.innerWidth < 1024) itemsPerView.value = 2
   else itemsPerView.value = 3
 
-  if (currentIndex.value > maxIndex.value) {
-    currentIndex.value = maxIndex.value
-  }
+  // 更新 CSS 變數，確保卡片寬度正確
+  document.documentElement.style.setProperty('--items-per-view', itemsPerView.value)
+
+  if (currentIndex.value > maxIndex.value) currentIndex.value = maxIndex.value
 }
 
 // 鍵盤控制
@@ -269,8 +235,8 @@ onMounted(() => {
   // 滾動動畫
   nextTick(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
             observer.unobserve(entry.target)
@@ -279,10 +245,7 @@ onMounted(() => {
       },
       { threshold: 0.2 }
     )
-
-    productCards.value.forEach((card) => {
-      if (card) observer.observe(card)
-    })
+    productCards.value.forEach(card => { if (card) observer.observe(card) })
   })
 })
 
@@ -292,11 +255,7 @@ onUnmounted(() => {
   document.body.style.overflow = ''
 })
 
-const getImageUrl = (name) => {
-  // 這是 Vite 官方推薦的動態導入資源方式
-  // 它會告訴 Vite 在打包時處理這個相對路徑。
-  return new URL(`../assets/images/${name}`, import.meta.url).href;
-};
+const getImageUrl = (name) => new URL(`../assets/images/${name}`, import.meta.url).href
 </script>
 
 <style scoped>
@@ -349,12 +308,6 @@ const getImageUrl = (name) => {
   position: absolute;
   inset: 0;
   z-index: 0;
-   background: linear-gradient(
-    135deg,
-    rgba(144, 238, 144, 0.3), /* 薄荷綠半透明 */
-    rgba(255, 182, 193, 0.3), /* 淺粉紅半透明 */
-    rgba(163, 181, 237, 0.3)  /* 淺橘半透明 */
-  );
   filter: brightness(1.05) saturate(1.1);
 }
 .section-content {
@@ -389,7 +342,7 @@ const getImageUrl = (name) => {
 
 /* Product Card */
 .product-card {
-  flex: 0 0 calc(33.333% - 14px);
+   flex: 0 0 calc((100% - (var(--items-per-view) - 1) * 20px) / var(--items-per-view));
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -418,10 +371,11 @@ const getImageUrl = (name) => {
   background: #f5f5f5;
 }
 
+
 .product-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+ 
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -725,7 +679,7 @@ const getImageUrl = (name) => {
 /* Responsive */
 @media (max-width: 1024px) {
   .product-card {
-    flex: 0 0 calc(50% - 10px);
+    flex: 0 0 calc((100% - 1 * 15px) / 2);
   }
   .hero-overlay h1 {
     font-size: 2rem;
@@ -749,6 +703,7 @@ const getImageUrl = (name) => {
   padding: 0;
   line-height: 1;
   }
+  .carousel-track { gap: 15px; }
 }
 
 @media (max-width: 640px) {
@@ -797,5 +752,7 @@ const getImageUrl = (name) => {
   padding: 0;
   line-height: 1;
   }
+  .carousel-track { gap: 0px; }
+  .product-card { flex: 0 0 100%; }
 }
 </style>

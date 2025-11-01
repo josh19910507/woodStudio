@@ -114,10 +114,9 @@ const faqs = [
   background:
     linear-gradient(
       to bottom right,
-      rgb(236, 224, 213),
+      rgb(242, 241, 240),
       rgba(251, 250, 249, 0.9)
     );
-  opacity: 0.7;
   z-index: 0;
 }
 
@@ -174,7 +173,7 @@ const faqs = [
   transition: background 0.3s;
 }
 .qa-question:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgb(212, 191, 191);
 }
 .arrow {
   transition: transform 0.3s ease;

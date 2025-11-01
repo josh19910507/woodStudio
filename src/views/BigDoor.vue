@@ -17,7 +17,7 @@
     </section>
 
     <!-- 木門選品 -->
-    <section class="products-section">
+    <section class="products-section ">
       <div class="section-background"></div>
       <div id="product" class="section-content">
         <h2>大門選品</h2>
@@ -35,9 +35,11 @@
                 :key="product.id"
                 class="product-card"
               >
-                <div class="product-image">
-                  <img :src="getImageUrl(product.imageName)" :alt="product.name" />
-                </div>
+                <img
+                  :src="getImageUrl(product.imageName)"
+                  :alt="product.name"
+                  class="product-image"
+                />
                 <p class="product-desc">{{ product.shortDesc }}</p>
               </div>
             </div>
@@ -45,19 +47,52 @@
 
           <button class="carousel-btn next" @click="nextSlide">→</button>
         </div>
-
-        
       </div>
+    </section>
+
+    <!-- 👇 新增：顏色選項區塊 -->
+    <section class="colors-section">
+      <div class="section-background"></div>
+      <div class="section-content">
+        <h2>顏色選項</h2>
+
+        <div class="carousel-container">
+          <button class="carousel-btn prev" @click="prevColor">←</button>
+
+          <div class="carousel-wrapper">
+            <div
+              class="carousel-track"
+              :style="{ transform: `translateX(-${colorIndex * slideWidth}%)` }"
+            >
+              <div
+                v-for="color in colors"
+                :key="color.id"
+                class="product-card"
+              >
+                <img
+                  :src="getImageUrl(color.imageName)"
+                  :alt="color.name"
+                  class="product-image"
+                />
+                <p class="product-desc">{{ color.shortDesc }}</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn next" @click="nextColor">→</button>
+        </div>
+        <br></br>
+      </div>
+      
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
+/* ---------- 木門產品滑動 ---------- */
 const currentIndex = ref(0)
 const itemsPerView = ref(3)
-
 const products = ref([
   { id: 1, name: '實木門系列', shortDesc: '質感溫潤，展現自然木紋之美。', imageName: '木門1.jpg' },
   { id: 2, name: '設計款大門', shortDesc: '兼具安全與美感的完美選擇。', imageName: '木門1.jpg' },
@@ -65,7 +100,6 @@ const products = ref([
   { id: 4, name: '設計工法展示', shortDesc: '精準工藝與美學的融合。', imageName: '木門1.jpg' },
   { id: 5, name: '高端木作工法', shortDesc: '專業施工品質，耐用兼具美觀。', imageName: '木門1.jpg' },
 ])
-
 const slideWidth = computed(() => 100 / itemsPerView.value)
 const maxIndex = computed(() => Math.max(0, products.value.length - itemsPerView.value))
 const totalSlides = computed(() => maxIndex.value + 1)
@@ -80,12 +114,37 @@ function goToSlide(index) {
   currentIndex.value = index
 }
 
+/* ---------- 顏色選項滑動 ---------- */
+const colorIndex = ref(0)
+const colors = ref([
+  { id: 1, name: '胡桃木色', shortDesc: '深沉典雅的高級木質色調。', imageName: 'color1.jpg' },
+  { id: 2, name: '楓木色', shortDesc: '溫潤自然，適合各式風格。', imageName: 'color2.jpg' },
+  { id: 3, name: '白橡色', shortDesc: '明亮輕盈，呈現北歐氛圍。', imageName: 'color3.jpg' },
+  { id: 4, name: '黑胡桃色', shortDesc: '穩重高雅，彰顯個人品味。', imageName: 'color4.jpg' },
+])
+const maxColorIndex = computed(() => Math.max(0, colors.value.length - itemsPerView.value))
+const totalColorSlides = computed(() => maxColorIndex.value + 1)
+
+function nextColor() {
+  if (colorIndex.value < maxColorIndex.value) colorIndex.value++
+}
+function prevColor() {
+  if (colorIndex.value > 0) colorIndex.value--
+}
+function goToColor(index) {
+  colorIndex.value = index
+}
+
+/* ---------- 公用 ---------- */
 function updateItemsPerView() {
   if (window.innerWidth < 640) itemsPerView.value = 1
   else if (window.innerWidth < 1024) itemsPerView.value = 2
   else itemsPerView.value = 3
 
-  if (currentIndex.value > maxIndex.value) currentIndex.value = maxIndex.value
+  if (currentIndex.value > maxIndex.value)
+    currentIndex.value = maxIndex.value
+  if (colorIndex.value > maxColorIndex.value)
+    colorIndex.value = maxColorIndex.value
 }
 
 function handleKeydown(e) {
@@ -93,25 +152,10 @@ function handleKeydown(e) {
   if (e.key === 'ArrowRight') nextSlide()
 }
 
-onMounted(async () => {
+onMounted(() => {
   updateItemsPerView()
   window.addEventListener('resize', updateItemsPerView)
   window.addEventListener('keydown', handleKeydown)
-
-  await nextTick()
-  const cards = document.querySelectorAll('.product-card')
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.2 }
-  )
-  cards.forEach((card) => observer.observe(card))
 })
 
 onUnmounted(() => {
@@ -121,243 +165,217 @@ onUnmounted(() => {
 
 function scrollToFooter() {
   const footer = document.getElementById('product')
-  if (footer) footer.scrollIntoView({ behavior: 'smooth' })
+  if (footer) {
+    footer.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
-const getImageUrl = (name) => new URL(`../assets/images/${name}`, import.meta.url).href
+const getImageUrl = (name) => {
+  return new URL(`../assets/images/${name}`, import.meta.url).href
+}
 </script>
 
 <style scoped>
+/* === 全域設定 === */
 .product-page {
-  font-family: 'Noto Sans TC', sans-serif;
-  color: #333;
+  font-family: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+  color: #3c2f25;
+  line-height: 1.6;
 }
 
-/* Hero Banner */
+/* === Hero Banner === */
 .hero-banner {
   position: relative;
   height: 70vh;
   overflow: hidden;
 }
-
 .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 柔和但不模糊 */
-  filter: brightness(0.9) contrast(1.05) saturate(1.1);
+  filter: brightness(85%) saturate(90%);
+  border-radius:1% ;
 }
-
-/* 增加深淺漸層層次（不模糊） */
-.hero-banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.55)
-  );
-  z-index: 1;
-}
-
 .hero-overlay {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.35);
+  background: linear-gradient(
+    lab(52.19% 4.2 1.52 / 0.45),
+    rgba(8, 7, 7, 0.3)
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #fff;
   text-align: center;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  border-radius:1% ;
 }
-
 .hero-overlay h1 {
   font-size: 3rem;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
-
 .hero-overlay p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+.btn-contact {
+  background: #b48a60;
+  color: #fff !important;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+.btn-contact:hover {
+  background: #a47a53;
+  transform: translateY(-2px);
 }
 
-/* Section */
-.products-section {
+/* === 共用區塊 === */
+.products-section,
+.colors-section {
   position: relative;
-  padding: 5rem 1rem;
+  padding: 6rem 1rem;
   overflow: hidden;
-}
-
-/* 深木色主題背景 */
-.section-background {
-  position: absolute;
-  inset: 0;
-  /* 深木紋底 + 半透明暗層次 */
-  background:
-    linear-gradient(
-      to bottom right,
-      rgba(245, 238, 234, 0.95),
-      rgba(252, 242, 238, 0.9)
-    );
-  opacity: 0.55;
-  filter: brightness(0.9) contrast(1.1) saturate(1.1);
-  z-index: 0;
-}
-
-/* 柔光暈層，讓深色不死黑 */
-.section-background::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 50% 30%,
-    rgba(255, 255, 255, 0.12),
-    transparent 70%
-  );
-  mix-blend-mode: overlay;
-  z-index: 1;
-}
-.section-content h2 {
-  color: #d8b990; /* 柔和象牙白 */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-}
-
-.product-desc {
-  color: #e8e3da;
 }
 .section-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   text-align: center;
 }
-
 .section-content h2 {
   font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #5a4634;
-  letter-spacing: 2px;
+  margin-bottom: 2.5rem;
+  color: #4b3829;
+  font-weight: 600;
+  position: relative;
+}
+.section-content h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #b48a60;
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
 }
 
-/* Carousel */
+/* === Carousel === */
 .carousel-container {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-
 .carousel-wrapper {
   overflow: hidden;
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
 }
-
 .carousel-track {
   display: flex;
-  gap: 14px;
   transition: transform 0.6s ease;
 }
 
+/* === 商品卡片 === */
 .product-card {
-  flex: 0 0 calc(33.333% - 14px);
-  border-radius: 12px;
-  overflow: hidden;
-  background: transparent;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease-out;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 0 8px;
+  transition: all 0.4s ease;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
-
-.product-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
-
-/* 圖片 */
 .product-image {
-  width: 100%;
-  aspect-ratio: 3/2;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 180px;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.product-desc {
+  color: #5c4a3a;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
 }
 
-.product-card:hover .product-image img {
+/* === 圓形箭頭按鈕 === */
+.carousel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffffcc;
+  border: 2px solid #b48a60;
+  color: #b48a60;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin: 0 1rem;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+.carousel-btn:hover {
+  background: #b48a60;
+  color: #fff;
   transform: scale(1.05);
 }
 
-/* 文字區 */
-.product-desc {
-  color: #444;
-  font-size: 0.95rem;
-  margin-top: 10px;
-  line-height: 1.5;
+/* === 指示點 === */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
-
-.carousel-btn {
-  display: flex;               /* 讓內容可以用 flex 居中 */
-  align-items: center;         /* 垂直置中箭頭 */
-  justify-content: center;     /* 水平置中箭頭 */
-  background: rgba(255, 255, 255, 0.7);
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin: 0 1rem;
-  transition: background 0.3s, transform 0.3s;
-  line-height: 1;              /* 防止字體本身的行高影響置中 */
-  padding: 0;                  /* 移除預設間距 */
-}
-
-.carousel-btn:hover {
-  background: rgba(255, 255, 255, 0.9);
-  transform: scale(1.1);
-}
-
-/* 聯絡按鈕 */
-.btn-contact {
-  background: #b48a60;
-  color: #fff !important;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-weight: 600;
+  background: #b38f61;
+  border: none;
+  margin: 0 5px;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+.carousel-indicators button.active {
+  width: 28px;
+  border-radius: 6px;
+  background: #b48a60;
 }
 
-.btn-contact:hover {
-  background: #a17752;
-  transform: translateY(-2px);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
+/* === RWD === */
+@media (min-width: 641px) and (max-width: 1024px) {
   .product-card {
-    flex: 0 0 calc(50% - 14px);
-  }
-  .product-desc {
-    font-size: 0.85rem;
+    flex: 0 0 50%;
   }
 }
-
-@media (max-width: 640px) {
+@media (min-width: 1025px) {
   .product-card {
-    flex: 0 0 100%;
+    flex: 0 0 33.3333%;
   }
-  .product-desc {
-    font-size: 0.75rem;
-  }
+  
 }
 
+/* 光線動畫 */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 文字及內容保持在上層 */
+.section-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
 </style>

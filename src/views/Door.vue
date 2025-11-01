@@ -41,16 +41,6 @@
 
           <button class="carousel-btn next" @click="nextSlide">→</button>
         </div>
-
-        <!-- 指示點 -->
-        <div v-if="showIndicators" class="carousel-indicators">
-          <button
-            v-for="(dot, index) in totalSlides"
-            :key="index"
-            :class="{ active: index === currentIndex }"
-            @click="goToSlide(index)"
-          ></button>
-        </div>
       </div>
     </section>
 
@@ -84,6 +74,7 @@
           </div>
           <button class="carousel-btn next" @click="nextColor">→</button>
         </div>
+        <br></br>
         <!-- 新增文案區塊 -->
         <div class="color-info">
         <p>顏色選項高達上百種！想了解更多，請點擊下方社群媒體連結。</p>
@@ -187,7 +178,6 @@ const getImageUrl = (name) => {
 .product-page {
   font-family: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
   color: #3c2f25;
-  background-color: #faf8f6;
   line-height: 1.6;
 }
 
@@ -202,13 +192,14 @@ const getImageUrl = (name) => {
   height: 100%;
   object-fit: cover;
   filter: brightness(85%) saturate(90%);
+  border-radius:1% ;
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    rgba(0, 0, 0, 0.45),
-    rgba(0, 0, 0, 0.3)
+    lab(52.19% 4.2 1.52 / 0.45),
+    rgba(8, 7, 7, 0.3)
   );
   display: flex;
   flex-direction: column;
@@ -216,6 +207,7 @@ const getImageUrl = (name) => {
   align-items: center;
   color: #fff;
   text-align: center;
+  border-radius:1% ;
 }
 .hero-overlay h1 {
   font-size: 3rem;
@@ -249,17 +241,6 @@ const getImageUrl = (name) => {
   padding: 6rem 1rem;
   overflow: hidden;
 }
-.section-background {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top left, #f5efe9 0%, #fff 70%);
-  z-index: 0;
-  opacity: 0.7;
-}
-.colors-section .section-background {
-  background: radial-gradient(circle at top right, #f3f0ed 0%, #fff 70%);
-  opacity: 0.8;
-}
 .section-content {
   position: relative;
   z-index: 1;
@@ -291,7 +272,7 @@ const getImageUrl = (name) => {
 }
 .carousel-wrapper {
   overflow: hidden;
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
 }
 .carousel-track {
@@ -301,17 +282,15 @@ const getImageUrl = (name) => {
 
 /* === 商品卡片 === */
 .product-card {
-  flex: 0 0 calc(33.333% - 16px);
-  border-radius: 16px;
-  background: #fff;
-  padding: 1rem 0.5rem;
-  margin: 0 8px;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 0 8px;
   transition: all 0.4s ease;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 .product-image {
   width: 90%;
@@ -361,7 +340,7 @@ const getImageUrl = (name) => {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #d8c9b6;
+  background: #b38f61;
   border: none;
   margin: 0 5px;
   transition: all 0.3s ease;
@@ -373,57 +352,16 @@ const getImageUrl = (name) => {
 }
 
 /* === RWD === */
-@media (max-width: 1024px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   .product-card {
-    flex: 0 0 calc(50% - 16px);
+    flex: 0 0 50%;
   }
 }
-@media (max-width: 640px) {
+@media (min-width: 1025px) {
   .product-card {
-    flex: 0 0 100%;
+    flex: 0 0 33.3333%;
   }
-  .product-image {
-    height: 150px;
-  }
-}
-/* === 顏色區塊背景微調：更深一點 === */
-.colors-section .section-background {
-  background: radial-gradient(circle at top right, #ece5dd 0%, #f9f6f3 70%);
-  opacity: 0.85; /* 加深整體顏色 */
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-/* === 區塊統一背景：優雅乾淨 + 木紋 + 光線 === */
-.products-section .section-background,
-.colors-section .section-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: 
-    url('../assets/images/wood-texture.png') center/cover no-repeat, /* 淡木紋 */
-    radial-gradient(circle at top left, #f5efe9 0%, #faf8f6 70%); /* 優雅漸層 */
-  opacity: 0.85;
-  overflow: hidden;
-}
-
-/* 動態光線疊加 */
-.products-section .section-background::before,
-.colors-section .section-background::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.03) 50%,
-    rgba(255, 255, 255, 0.12) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-  animation: shimmer 12s linear infinite;
+  
 }
 
 /* 光線動畫 */
@@ -437,13 +375,5 @@ const getImageUrl = (name) => {
   position: relative;
   z-index: 2;
   text-align: center;
-}
-
-/* 顏色區塊微加深色調 */
-.colors-section .section-background {
-  background: 
-    url('../assets/images/wood-texture.png') center/cover no-repeat,
-    radial-gradient(circle at top right, #ece5dd 0%, #f9f6f3 70%);
-  opacity: 0.9;
 }
 </style>

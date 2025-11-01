@@ -196,7 +196,6 @@ const getImageUrl = (name) => {
 .section-background {
   position: absolute;
   inset: 0;
-  background: url('../assets/images/木紋背景.jpg') center/cover no-repeat fixed;
   opacity: 0.2;
   z-index: 0;
 }
