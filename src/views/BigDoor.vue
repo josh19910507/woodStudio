@@ -134,72 +134,230 @@ const getImageUrl = (name) => new URL(`../assets/images/${name}`, import.meta.ur
 }
 
 /* Hero Banner */
-.hero-banner { position: relative; height: 70vh; overflow: hidden; }
-.hero-image { width: 100%; height: 100%; object-fit: cover; }
-.hero-overlay {
-  position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4);
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  color: #fff; text-align: center;
+.hero-banner {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
 }
-.hero-overlay h1 { font-size: 3rem; letter-spacing: 4px; }
-.hero-overlay p { font-size: 1.2rem; }
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 柔和但不模糊 */
+  filter: brightness(0.9) contrast(1.05) saturate(1.1);
+}
+
+/* 增加深淺漸層層次（不模糊） */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.55)
+  );
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  letter-spacing: 4px;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+}
 
 /* Section */
-.products-section { position: relative; padding: 5rem 1rem; overflow: hidden; }
-.section-background {
-  position: absolute; inset: 0;
-  background: url('../assets/images/木紋背景.jpg') center/cover no-repeat fixed;
-  opacity: 0.2; z-index: 0;
+.products-section {
+  position: relative;
+  padding: 5rem 1rem;
+  overflow: hidden;
 }
-.section-content { position: relative; z-index: 1; text-align: center; }
-.section-content h2 { font-size: 2rem; margin-bottom: 2rem; color: #5a4634; }
+
+/* 深木色主題背景 */
+.section-background {
+  position: absolute;
+  inset: 0;
+  /* 深木紋底 + 半透明暗層次 */
+  background:
+    linear-gradient(
+      to bottom right,
+      rgba(245, 238, 234, 0.95),
+      rgba(252, 242, 238, 0.9)
+    );
+  opacity: 0.55;
+  filter: brightness(0.9) contrast(1.1) saturate(1.1);
+  z-index: 0;
+}
+
+/* 柔光暈層，讓深色不死黑 */
+.section-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(255, 255, 255, 0.12),
+    transparent 70%
+  );
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+.section-content h2 {
+  color: #d8b990; /* 柔和象牙白 */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.product-desc {
+  color: #e8e3da;
+}
+.section-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.section-content h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #5a4634;
+  letter-spacing: 2px;
+}
 
 /* Carousel */
-.carousel-container { display: flex; align-items: center; justify-content: center; position: relative; }
-.carousel-wrapper { overflow: hidden; width: 80%; max-width: 1200px; }
-.carousel-track {
-  display: flex; gap: 14px; transition: transform 0.6s ease;
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 80%;
+  max-width: 1200px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 14px;
+  transition: transform 0.6s ease;
+}
+
 .product-card {
   flex: 0 0 calc(33.333% - 14px);
-  border-radius: 12px; overflow: hidden;
-  background: transparent; opacity: 0; transform: translateY(40px);
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  opacity: 0;
+  transform: translateY(40px);
   transition: all 0.8s ease-out;
 }
-.product-card.visible { opacity: 1; transform: translateY(0); }
+
+.product-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* 圖片 */
-.product-image { width: 100%; aspect-ratio: 3/2; overflow: hidden; border-radius: 12px; }
-.product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.product-card:hover .product-image img { transform: scale(1.05); }
+.product-image {
+  width: 100%;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
 
 /* 文字區 */
-.product-desc { color: #444; font-size: 0.95rem; margin-top: 10px; line-height: 1.5; }
-
-/* Buttons */
-.carousel-btn {
-  background: rgba(255, 255, 255, 0.7); border: none; font-size: 1.5rem; cursor: pointer;
-  border-radius: 50%; width: 2.5rem; height: 2.5rem; margin: 0 1rem;
-  transition: background 0.3s, transform 0.3s;
+.product-desc {
+  color: #444;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  line-height: 1.5;
 }
-.carousel-btn:hover { background: rgba(255, 255, 255, 0.9); transform: scale(1.1); }
 
+.carousel-btn {
+  display: flex;               /* 讓內容可以用 flex 居中 */
+  align-items: center;         /* 垂直置中箭頭 */
+  justify-content: center;     /* 水平置中箭頭 */
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 1rem;
+  transition: background 0.3s, transform 0.3s;
+  line-height: 1;              /* 防止字體本身的行高影響置中 */
+  padding: 0;                  /* 移除預設間距 */
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+}
 
 /* 聯絡按鈕 */
 .btn-contact {
-  background: #b48a60; color: #fff !important; padding: 10px 22px;
-  border-radius: 8px; font-weight: 600; transition: all 0.3s ease;
+  background: #b48a60;
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
-.btn-contact:hover { background: #a17752; transform: translateY(-2px); }
+
+.btn-contact:hover {
+  background: #a17752;
+  transform: translateY(-2px);
+}
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .product-card { flex: 0 0 calc(50% - 14px); }
-  .product-desc { font-size: 0.85rem; }
+  .product-card {
+    flex: 0 0 calc(50% - 14px);
+  }
+  .product-desc {
+    font-size: 0.85rem;
+  }
 }
+
 @media (max-width: 640px) {
-  .product-card { flex: 0 0 100%; }
-  .product-desc { font-size: 0.75rem; }
+  .product-card {
+    flex: 0 0 100%;
+  }
+  .product-desc {
+    font-size: 0.75rem;
+  }
 }
+
 </style>

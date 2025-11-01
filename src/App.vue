@@ -55,7 +55,8 @@ const routeOrder = [
   { path: '/', name: 'Door' },
   { path: '/BigDoor', name: 'BigDoor' },
   { path: '/Design', name: 'Design' },
-  { path: '/Construction', name: 'Construction' }
+  { path: '/Construction', name: 'Construction' },
+  { path: '/QA', name: 'QA' }
 ]
 
 // 從 Header 注入的關閉選單函數

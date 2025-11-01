@@ -79,15 +79,6 @@
           <button class="carousel-btn next" @click="nextSlide" :disabled="currentIndex >= maxIndex">→</button>
         </div>
 
-        <!-- 指示點 -->
-        <div class="carousel-indicators">
-          <button
-            v-for="(dot, index) in totalSlides"
-            :key="index"
-            :class="{ active: index === currentIndex }"
-            @click="goToSlide(index)"
-          ></button>
-        </div>
       </div>
     </section>
 
@@ -191,7 +182,7 @@ const products = ref([
   }
 ])
 
-const slideWidth = computed(() => 110 / itemsPerView.value)
+const slideWidth = computed(() => 100 / itemsPerView.value)
 const maxIndex = computed(() =>
   Math.max(0, products.value.length - itemsPerView.value)
 )
@@ -320,10 +311,12 @@ const getImageUrl = (name) => {
   height: 70vh;
   overflow: hidden;
 }
+
 .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.9) contrast(1.05) saturate(1.1);
 }
 .hero-overlay {
   position: absolute;
@@ -355,9 +348,14 @@ const getImageUrl = (name) => {
 .section-background {
   position: absolute;
   inset: 0;
-  background: url('../assets/images/木紋背景.jpg') center/cover no-repeat fixed;
-  opacity: 0.2;
   z-index: 0;
+   background: linear-gradient(
+    135deg,
+    rgba(144, 238, 144, 0.3), /* 薄荷綠半透明 */
+    rgba(255, 182, 193, 0.3), /* 淺粉紅半透明 */
+    rgba(163, 181, 237, 0.3)  /* 淺橘半透明 */
+  );
+  filter: brightness(1.05) saturate(1.1);
 }
 .section-content {
   position: relative;
@@ -486,18 +484,13 @@ const getImageUrl = (name) => {
 }
 
 .card-indicators span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all 0.3s;
+ transition: all 0.3s ease;
 }
 
 .card-indicators span.active {
-  background: #fff;
-  width: 20px;
-  border-radius: 4px;
+   background: #fff;
+  width: 16px; /* 適中寬度 */
+  border-radius: 8px;
 }
 
 /* 點擊提示 */
@@ -539,18 +532,20 @@ const getImageUrl = (name) => {
 
 /* 主輪播按鈕 */
 .carousel-btn {
-  background: rgba(255, 255, 255, 0.9);
+  display: flex;               /* 讓內容可以用 flex 居中 */
+  align-items: center;         /* 垂直置中箭頭 */
+  justify-content: center;     /* 水平置中箭頭 */
+  background: rgba(255, 255, 255, 0.7);
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 1rem;
+  transition: background 0.3s, transform 0.3s;
+  line-height: 1;              /* 防止字體本身的行高影響置中 */
+  padding: 0;                  /* 移除預設間距 */
 }
 
 .carousel-btn:hover:not(:disabled) {
@@ -763,11 +758,6 @@ const getImageUrl = (name) => {
   .carousel-wrapper {
     width: 100%;
   }
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
   .hero-overlay h1 {
     font-size: 1.5rem;
   }
@@ -775,9 +765,10 @@ const getImageUrl = (name) => {
     height: 200px;
   }
   .lightbox-nav {
-    width: 50px;
+    width: 40px;
     height: 40px;
     font-size: 1.2rem;
+    border-radius: 50%; /* 保持圓形 */
   }
   .lightbox-content {
   position: relative;

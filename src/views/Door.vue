@@ -82,19 +82,14 @@
               </div>
             </div>
           </div>
-
           <button class="carousel-btn next" @click="nextColor">→</button>
         </div>
-
-        <div v-if="showIndicators" class="carousel-indicators">
-          <button
-            v-for="(dot, index) in totalColorSlides"
-            :key="index"
-            :class="{ active: index === colorIndex }"
-            @click="goToColor(index)"
-          ></button>
+        <!-- 新增文案區塊 -->
+        <div class="color-info">
+        <p>顏色選項高達上百種！想了解更多，請點擊下方社群媒體連結。</p>
         </div>
       </div>
+      
     </section>
   </div>
 </template>

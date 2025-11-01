@@ -11,6 +11,7 @@
           <li><router-link to="/BigDoor">大門</router-link></li>
           <li><router-link to="/Design">設計</router-link></li>
           <li><router-link to="/Construction">工法</router-link></li>
+          <li><router-link to="/QA">Q&A</router-link></li>
           <li>
             <router-link
               to="#contact"

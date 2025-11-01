@@ -282,8 +282,10 @@ const getImageUrl = (name) => {
   line-height: 1.5;
 }
 
-/* Buttons */
 .carousel-btn {
+  display: flex;               /* 讓內容可以用 flex 居中 */
+  align-items: center;         /* 垂直置中箭頭 */
+  justify-content: center;     /* 水平置中箭頭 */
   background: rgba(255, 255, 255, 0.7);
   border: none;
   font-size: 1.5rem;
@@ -293,6 +295,8 @@ const getImageUrl = (name) => {
   height: 2.5rem;
   margin: 0 1rem;
   transition: background 0.3s, transform 0.3s;
+  line-height: 1;              /* 防止字體本身的行高影響置中 */
+  padding: 0;                  /* 移除預設間距 */
 }
 .carousel-btn:hover {
   background: rgba(255, 255, 255, 0.9);
