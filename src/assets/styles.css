@@ -1,0 +1,42 @@
+:root{
+  --bg:#f8f5f2;--primary:#4b3d2a;--accent:#b48a60;--muted:#6b6259;--white:#fff;--shadow:rgba(0,0,0,0.08)
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  line-height:1.6;
+  color:var(--primary);
+  background: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.70)), url('/src/assets/image/wood-bg.svg') no-repeat center center fixed;
+  background-size:cover;
+  overflow-x:hidden;
+}
+.container{max-width:1300px;margin:0 auto;padding:40px 20px}
+a{color:inherit;text-decoration:none}
+.brand{font-weight:800;font-size:20px;color:var(--accent);letter-spacing:1px}
+.fade-section{opacity:0;transform:translateY(30px);transition:all 0.8s ease-out}
+.fade-section.visible{opacity:1;transform:translateY(0)}
+a:hover {
+  color: #535bf2;
+}
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.card {
+  padding: 2em;
+}
