@@ -35,7 +35,11 @@
     <transition name="slide-fade">
       <nav v-if="menuOpen" class="mobile-menu">
         <ul>
-          <li><router-link to="/" @click="closeMenu">首頁</router-link></li>
+          <li><router-link to="/">木門</router-link></li>
+          <li><router-link to="/BigDoor">大門</router-link></li>
+          <li><router-link to="/Design">設計</router-link></li>
+          <li><router-link to="/Construction">工法</router-link></li>
+          <li><router-link to="/QA">Q&A</router-link></li>
           <li>
             <router-link
               to="#contact"
@@ -91,11 +95,20 @@ header {
   z-index: 50;
 }
 
+/* 容器置中設定 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 /* 品牌名稱 */
@@ -160,28 +173,45 @@ header {
 }
 
 .mobile-menu {
-  display: flex;
-  flex-direction: column;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(6px);
   border-top: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 18px 0;
+  padding: 12px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .mobile-menu ul {
   display: flex;
-  flex-direction: column;
-  gap: 18px;
+  flex-direction: row;
+  gap: 12px;
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
   list-style: none;
+  white-space: nowrap;
 }
 
 .mobile-menu a {
   text-decoration: none;
   color: #333;
   font-weight: 600;
-  padding: 8px 20px;
+  padding: 8px 16px;
+  font-size: 15px;
+  display: block;
+  border-radius: 6px;
+  transition: background 0.25s ease;
+}
+
+.mobile-menu a:hover {
+  background: rgba(180, 138, 96, 0.1);
+}
+
+.mobile-menu .btn-contact {
+  padding: 8px 18px;
+  font-size: 15px;
+  white-space: nowrap;
 }
 
 /* ========== 動畫效果 ========== */
@@ -204,6 +234,32 @@ header {
 
   .menu-toggle {
     display: block;
+  }
+  
+  .brand {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .mobile-menu ul {
+    padding: 0 16px;
+    gap: 8px;
+  }
+  
+  .mobile-menu a {
+    font-size: 14px;
+    padding: 7px 14px;
+  }
+  
+  .mobile-menu .btn-contact {
+    padding: 7px 16px;
+    font-size: 14px;
   }
 }
 </style>

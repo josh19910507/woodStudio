@@ -7,7 +7,7 @@ body{
   font-family: Inter, system-ui, -apple-system, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
   line-height:1.6;
   color:var(--primary);
-  background: linear-gradient(rgba(246, 241, 241, 0.7), rgba(224, 215, 210, 0.9)), url('../assets/images/backGround.jpg') no-repeat center center fixed;
+  background: linear-gradient(rgba(246, 241, 241, 0.7), rgba(255, 255, 255, 0.9)),  no-repeat center center fixed;
   background-size:cover;
   overflow-x:hidden;
 }

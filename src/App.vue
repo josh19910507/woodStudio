@@ -64,6 +64,13 @@ const closeMenu = inject('closeMenu', () => {})
 
 let observer = null
 
+// 滑動手勢相關變數
+let touchStartX = 0
+let touchEndX = 0
+let touchStartY = 0
+let touchEndY = 0
+const minSwipeDistance = 50 // 最小滑動距離
+
 // 計算當前路由索引
 const currentRouteIndex = computed(() => {
   return routeOrder.findIndex(r => r.path === route.path)
@@ -106,6 +113,35 @@ function handleKeydown(e) {
     navigatePrev()
   } else if (e.key === 'ArrowRight') {
     navigateNext()
+  }
+}
+
+// 觸控滑動事件處理
+function handleTouchStart(e) {
+  touchStartX = e.changedTouches[0].screenX
+  touchStartY = e.changedTouches[0].screenY
+}
+
+function handleTouchEnd(e) {
+  touchEndX = e.changedTouches[0].screenX
+  touchEndY = e.changedTouches[0].screenY
+  handleSwipeGesture()
+}
+
+function handleSwipeGesture() {
+  const horizontalDistance = touchEndX - touchStartX
+  const verticalDistance = Math.abs(touchEndY - touchStartY)
+  
+  // 確保是水平滑動(水平距離大於垂直距離)
+  if (Math.abs(horizontalDistance) > verticalDistance) {
+    // 向左滑動 (下一頁)
+    if (horizontalDistance < -minSwipeDistance) {
+      navigateNext()
+    }
+    // 向右滑動 (上一頁)
+    else if (horizontalDistance > minSwipeDistance) {
+      navigatePrev()
+    }
   }
 }
 
@@ -163,6 +199,8 @@ onMounted(() => {
   initObserver()
   observeElements()
   window.addEventListener('keydown', handleKeydown)
+  window.addEventListener('touchstart', handleTouchStart, { passive: true })
+  window.addEventListener('touchend', handleTouchEnd, { passive: true })
 })
 
 // 監聽路由變化
@@ -181,6 +219,8 @@ onUnmounted(() => {
     observer.disconnect()
   }
   window.removeEventListener('keydown', handleKeydown)
+  window.removeEventListener('touchstart', handleTouchStart)
+  window.removeEventListener('touchend', handleTouchEnd)
 })
 </script>
 
@@ -335,13 +375,14 @@ onUnmounted(() => {
   min-width: 0;
 }
 
-/* 導航箭頭 */
+/* 導航箭頭 - 固定在畫面上,滾動時不移動 */
 .nav-arrow {
   flex-shrink: 0;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border: 2px solid #b48a60;
   color: #b48a60;
   cursor: pointer;
@@ -349,17 +390,25 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 50vh;
-  align-self: flex-start;
-  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.nav-arrow-left {
+  left: 20px;
+}
+
+.nav-arrow-right {
+  right: 20px;
 }
 
 .nav-arrow:hover:not(:disabled) {
   background: #b48a60;
   color: white;
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
   box-shadow: 0 6px 20px rgba(180, 138, 96, 0.3);
 }
 
@@ -371,7 +420,7 @@ onUnmounted(() => {
 }
 
 .nav-arrow:active:not(:disabled) {
-  transform: scale(0.95);
+  transform: translateY(-50%) scale(0.95);
 }
 
 /* 響應式設計 */
@@ -384,6 +433,14 @@ onUnmounted(() => {
   .nav-arrow {
     width: 50px;
     height: 50px;
+  }
+  
+  .nav-arrow-left {
+    left: 15px;
+  }
+  
+  .nav-arrow-right {
+    right: 15px;
   }
   
   .nav-arrow svg {
@@ -401,9 +458,6 @@ onUnmounted(() => {
   .nav-arrow {
     width: 44px;
     height: 44px;
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
   }
   
   .nav-arrow-left {
@@ -412,10 +466,6 @@ onUnmounted(() => {
   
   .nav-arrow-right {
     right: 10px;
-  }
-  
-  .nav-arrow:hover:not(:disabled) {
-    transform: translateY(-50%) scale(1.05);
   }
   
   .nav-arrow svg {
@@ -428,8 +478,6 @@ onUnmounted(() => {
   .nav-arrow {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
   }
   
   .nav-arrow-left {

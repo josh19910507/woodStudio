@@ -2,7 +2,7 @@
   <div class="product-page" >
     <!-- Hero Banner -->
     <section class="hero-banner">
-      <img src="../assets/images/工法1.jpg" alt="木門主題" class="hero-image" />
+      <img src="../assets/images/工法1.jpg" alt="" class="hero-image" />
       <div class="hero-overlay">
         <h1>工法</h1>
         <p>探索我們的優質產品系列</p>
