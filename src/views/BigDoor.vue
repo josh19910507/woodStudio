@@ -9,7 +9,7 @@
         <div class="hero-content">
           <span class="hero-subtitle">GRAND ENTRANCE DOORS</span>
           <h1 class="hero-title">大門</h1>
-          <p class="hero-description">探索我們的優質產品系列</p>
+          <p class="hero-description">堅固、安全與美學兼具的設計，體現現代家的格調。<br></br>從門面開始，展現專業工藝與對品質的堅持。</p>
           <button class="btn-contact" @click="scrollToFooter">
             <span>立即了解更多</span>
             <span class="btn-arrow">→</span>
@@ -239,50 +239,46 @@ const itemsPerView = ref(8)
 
 /* 鑄鋁門 */
 const generalProducts = ref([
-  { id: 1, name: '實木門系列', shortDesc: '', imageName: '木門1.jpg' },
-  { id: 2, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 3, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 4, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 5, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 6, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 7, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 8, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 9, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 10, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 11, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 12, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
+  { id: 1, name: '', shortDesc: '', imageName: '大門鑄鋁門01.jpg' },
+  { id: 2, name: '', shortDesc: '', imageName: '大門鑄鋁門02.jpg' },
+  { id: 3, name: '', shortDesc: '', imageName: '大門鑄鋁門03.jpg' },
+  { id: 4, name: '', shortDesc: '', imageName: '大門鑄鋁門04.jpg' },
+  { id: 5, name: '', shortDesc: '', imageName: '大門鑄鋁門05.jpg' },
+  { id: 6, name: '', shortDesc: '', imageName: '大門鑄鋁門06.jpg' },
+  { id: 7, name: '', shortDesc: '', imageName: '大門鑄鋁門07.jpg' },
+  { id: 8, name: '', shortDesc: '', imageName: '大門鑄鋁門08.jpg' },
+  { id: 9, name: '', shortDesc: '', imageName: '大門鑄鋁門09.jpg' },
+  { id: 10, name: '', shortDesc: '', imageName: '大門鑄鋁門10.jpg' },
+  { id: 11, name: '', shortDesc: '', imageName: '大門鑄鋁門11.jpg' },
+  { id: 12, name: '', shortDesc: '', imageName: '大門鑄鋁門12.jpg' },
 ])
 
 /* 外玄關門 */
 const pressedProducts = ref([
-  { id: 1, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 2, name: '壓花款B', shortDesc: '', imageName: '木門4.jpg' },
-  { id: 3, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 4, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 5, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 6, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 7, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 8, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 9, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 10, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 11, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
-  { id: 12, name: '設計款大門', shortDesc: '', imageName: '木門2.jpg' },
+  { id: 1, name: '', shortDesc: '', imageName: '大門外玄關01.jpg' },
+  { id: 2, name: '', shortDesc: '', imageName: '大門外玄關02.jpg' },
+  { id: 3, name: '', shortDesc: '', imageName: '大門外玄關03.jpg' },
+  { id: 4, name: '', shortDesc: '', imageName: '大門外玄關04.jpg' },
+  { id: 5, name: '', shortDesc: '', imageName: '大門外玄關05.jpg' },
+  { id: 6, name: '', shortDesc: '', imageName: '大門外玄關06.jpg' },
+  { id: 7, name: '', shortDesc: '', imageName: '大門外玄關07.jpg' },
+  { id: 8, name: '', shortDesc: '', imageName: '大門外玄關08.jpg' },
+  { id: 9, name: '', shortDesc: '', imageName: '大門外玄關09.jpg' },
+  { id: 10, name: '', shortDesc: '', imageName: '大門外玄關10.jpg' }
 ])
 
 /* 內玄關門 */
 const aluminumProducts = ref([
-  { id: 1, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 2, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 3, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 4, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 5, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 6, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 7, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 8, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 9, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 10, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 11, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
-  { id: 12, name: '壓花款A', shortDesc: '', imageName: '木門3.jpg' },
+  { id: 1, name: '', shortDesc: '', imageName: '壓花門01.jpg' },
+  { id: 2, name: '', shortDesc: '', imageName: '壓花門02.jpg' },
+  { id: 3, name: '', shortDesc: '', imageName: '壓花門03.jpg' },
+  { id: 4, name: '', shortDesc: '', imageName: '壓花門04.jpg' },
+  { id: 5, name: '', shortDesc: '', imageName: '壓花門05.jpg' },
+  { id: 6, name: '', shortDesc: '', imageName: '壓花門06.jpg' },
+  { id: 7, name: '', shortDesc: '', imageName: '壓花門07.jpg' },
+  { id: 8, name: '', shortDesc: '', imageName: '壓花門08.jpg' },
+  { id: 9, name: '', shortDesc: '', imageName: '壓花門09.jpg' },
+  { id: 10, name: '', shortDesc: '', imageName: '壓花門10.jpg' }
 ])
 
 const slideWidth = computed(() => 100 / itemsPerView.value)
@@ -300,14 +296,70 @@ function prevAluminum() { if (aluminumIndex.value > 0) aluminumIndex.value-- }
 
 /* ---------- 顏色選項 ---------- */
 const colors = ref([
-  { id: 1, name: '胡桃木色', shortDesc: '深沉典雅的高級木質色調。', imageName: 'color1.jpg' },
-  { id: 2, name: '楓木色', shortDesc: '溫潤自然,適合各式風格。', imageName: 'color2.jpg' },
-  { id: 3, name: '白橡色', shortDesc: '明亮輕盈,呈現北歐氛圍。', imageName: 'color3.jpg' },
-  { id: 4, name: '黑胡桃色', shortDesc: '穩重高雅,彰顯個人品味。', imageName: 'color4.jpg' },
-  { id: 5, name: '櫻桃木色', shortDesc: '溫暖細膩,散發優雅氣息。', imageName: 'color1.jpg' },
-  { id: 6, name: '柚木色', shortDesc: '經典耐看,展現自然質感。', imageName: 'color2.jpg' },
-  { id: 7, name: '橡木色', shortDesc: '清新明亮,帶來舒適感受。', imageName: 'color3.jpg' },
-  { id: 8, name: '紅木色', shortDesc: '奢華大氣,彰顯尊貴品味。', imageName: 'color4.jpg' },
+  { id: 1, name: '', shortDesc: '', imageName: '001.jpg' },
+  { id: 2, name: '', shortDesc: '', imageName: '002.jpg' },
+  { id: 3, name: '', shortDesc: '', imageName: '003.jpg' },
+  { id: 4, name: '', shortDesc: '', imageName: '004.jpg' },
+  { id: 5, name: '', shortDesc: '', imageName: '005.jpg' },
+  { id: 6, name: '', shortDesc: '', imageName: '006.jpg' },
+  { id: 7, name: '', shortDesc: '', imageName: '007.jpg' },
+  { id: 8, name: '', shortDesc: '', imageName: '008.jpg' },
+  { id: 9, name: '', shortDesc: '', imageName: '009.jpg' },
+  { id: 10, name: '', shortDesc: '', imageName: '010.jpg' },
+  { id: 11, name: '', shortDesc: '', imageName: '011.jpg' },
+  { id: 12, name: '', shortDesc: '', imageName: '012.jpg' },
+  { id: 13, name: '', shortDesc: '', imageName: '013.jpg' },
+  { id: 14, name: '', shortDesc: '', imageName: '014.jpg' },
+  { id: 15, name: '', shortDesc: '', imageName: '015.jpg' },
+  { id: 16, name: '', shortDesc: '', imageName: '016.jpg' },
+  { id: 17, name: '', shortDesc: '', imageName: '017.jpg' },
+  { id: 18, name: '', shortDesc: '', imageName: '018.jpg' },
+  { id: 19, name: '', shortDesc: '', imageName: '019.jpg' },
+  { id: 20, name: '', shortDesc: '', imageName: '020.jpg' },
+  { id: 21, name: '', shortDesc: '', imageName: '021.jpg' },
+  { id: 22, name: '', shortDesc: '', imageName: '022.jpg' },
+  { id: 23, name: '', shortDesc: '', imageName: '023.jpg' },
+  { id: 24, name: '', shortDesc: '', imageName: '024.jpg' },
+  { id: 25, name: '', shortDesc: '', imageName: '025.jpg' },
+  { id: 26, name: '', shortDesc: '', imageName: '026.jpg' },
+  { id: 27, name: '', shortDesc: '', imageName: '027.jpg' },
+  { id: 28, name: '', shortDesc: '', imageName: '028.jpg' },
+  { id: 29, name: '', shortDesc: '', imageName: '029.jpg' },
+  { id: 30, name: '', shortDesc: '', imageName: '030.jpg' },
+  { id: 31, name: '', shortDesc: '', imageName: '031.jpg' },
+  { id: 32, name: '', shortDesc: '', imageName: '032.jpg' },
+  { id: 33, name: '', shortDesc: '', imageName: '033.jpg' },
+  { id: 34, name: '', shortDesc: '', imageName: '034.jpg' },
+  { id: 35, name: '', shortDesc: '', imageName: '035.jpg' },
+  { id: 38, name: '', shortDesc: '', imageName: '038.jpg' },
+  { id: 39, name: '', shortDesc: '', imageName: '039.jpg' },
+  { id: 40, name: '', shortDesc: '', imageName: '040.jpg' },
+  { id: 41, name: '', shortDesc: '', imageName: '041.jpg' },
+  { id: 42, name: '', shortDesc: '', imageName: '042.jpg' },
+  { id: 43, name: '', shortDesc: '', imageName: '043.jpg' },
+  { id: 44, name: '', shortDesc: '', imageName: '044.jpg' },
+  { id: 45, name: '', shortDesc: '', imageName: '045.jpg' },
+  { id: 46, name: '', shortDesc: '', imageName: '046.jpg' },
+  { id: 47, name: '', shortDesc: '', imageName: '047.jpg' },
+  { id: 48, name: '', shortDesc: '', imageName: '048.jpg' },
+  { id: 49, name: '', shortDesc: '', imageName: '049.jpg' },
+  { id: 50, name: '', shortDesc: '', imageName: '050.jpg' },
+  { id: 51, name: '', shortDesc: '', imageName: '051.jpg' },
+  { id: 52, name: '', shortDesc: '', imageName: '052.jpg' },
+  { id: 53, name: '', shortDesc: '', imageName: '053.jpg' },
+  { id: 54, name: '', shortDesc: '', imageName: '054.jpg' },
+  { id: 55, name: '', shortDesc: '', imageName: '055.jpg' },
+  { id: 56, name: '', shortDesc: '', imageName: '056.jpg' },
+  { id: 57, name: '', shortDesc: '', imageName: '057.jpg' },
+  { id: 58, name: '', shortDesc: '', imageName: '058.jpg' },
+  { id: 59, name: '', shortDesc: '', imageName: '059.jpg' },
+  { id: 60, name: '', shortDesc: '', imageName: '060.jpg' },
+  { id: 61, name: '', shortDesc: '', imageName: '061.jpg' },
+  { id: 62, name: '', shortDesc: '', imageName: '062.jpg' },
+{ id: 63, name: '', shortDesc: '', imageName: '063.jpg' },
+{ id: 64, name: '', shortDesc: '', imageName: '064.jpg' },
+{ id: 65, name: '', shortDesc: '', imageName: '065.jpg' },
+{ id: 67, name: '', shortDesc: '', imageName: '067.jpg' },
 ])
 
 /* ---------- 公用 ---------- */
@@ -345,7 +397,7 @@ function scrollToFooter() {
 }
 
 const getImageUrl = (name) => {
-  return new URL(`../assets/images/${name}`, import.meta.url).href
+  return new URL(`../assets/images/bigDoor/${name}`, import.meta.url).href
 }
 </script>
 
@@ -640,7 +692,6 @@ const getImageUrl = (name) => {
 .carousel-wrapper {
   overflow: hidden;
   flex: 1;
-  border-radius: 20px;
 }
 
 .carousel-track {
@@ -650,6 +701,7 @@ const getImageUrl = (name) => {
 
 /* === 商品卡片 === */
 .product-card {
+  max-width: 100%;
   flex: 0 0 12.5%;
   padding: 0 12px;
   box-sizing: border-box;
@@ -657,27 +709,22 @@ const getImageUrl = (name) => {
 
 .product-image-wrapper {
   position: relative;
-  overflow: hidden;
-  border-radius: 16px;
+  border-radius: 3px;
   aspect-ratio: 3/4;
   background: #f5f1eb;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.product-card:hover .product-image-wrapper {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-}
+
 
 .product-image {
   width: 100%;
-  height: 100%;
+  height: 130%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.product-card:hover .product-image {
+.product-card:hover .product-image{
   transform: scale(1.1);
 }
 
@@ -695,22 +742,6 @@ const getImageUrl = (name) => {
 
 .product-card:hover .product-overlay {
   opacity: 1;
-}
-
-.view-more {
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  padding: 8px 20px;
-  border: 2px solid #fff;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
-
-.view-more:hover {
-  background: #fff;
-  color: #3c2f25;
 }
 
 .product-info {
@@ -783,7 +814,7 @@ const getImageUrl = (name) => {
 }
 
 .color-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(0px);
 }
 
 .color-image-wrapper {
@@ -829,6 +860,7 @@ const getImageUrl = (name) => {
   margin-top: 0.5rem;
 }
 
+
 /* === RWD === */
 @media (max-width: 768px) {
   .hero-title {
@@ -837,7 +869,7 @@ const getImageUrl = (name) => {
   }
 
   .hero-description {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .section-header h2 {
@@ -892,6 +924,14 @@ const getImageUrl = (name) => {
 
   .product-desc {
     font-size: 0.8rem;
+  }
+  .product-image-wrapper {
+    height: 70%;
+    width: 100%;
+    }
+  .product-image{
+    width: 140%;
+    height: 130%;
   }
 }
 

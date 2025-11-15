@@ -6,6 +6,9 @@
       <a href="https://m.facebook.com/2010828369012561/" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" style="width:40px;height:40px;object-fit:contain;">
       </a>
+      <a href="https://lin.ee/556Z4mZ" target="_blank">
+        <img src="../assets/images/line.png" alt="Facebook" style="width:40px;height:40px;object-fit:contain;">
+      </a>
     </div>
   
     <p>© 2025 鼎揚匠心木作. All rights reserved.</p>

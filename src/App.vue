@@ -3,17 +3,7 @@
   <transition name="page-fade" mode="out-in">
     <main class="fullwidth">
       <div class="router-navigation">
-        <!-- 左箭頭 -->
-        <button 
-          class="nav-arrow nav-arrow-left"
-          @click="navigatePrev"
-          :disabled="!hasPrevRoute"
-          v-if="showArrows"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
+        
 
         <!-- 路由視圖 -->
         <div class="router-content">
@@ -23,18 +13,6 @@
             </transition>
           </router-view>
         </div>
-
-        <!-- 右箭頭 -->
-        <button 
-          class="nav-arrow nav-arrow-right"
-          @click="navigateNext"
-          :disabled="!hasNextRoute"
-          v-if="showArrows"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
       </div>
     </main>
   </transition>
