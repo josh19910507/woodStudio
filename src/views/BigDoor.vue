@@ -218,7 +218,6 @@
                 :alt="color.name"
                 class="color-image"
               />
-              <div class="color-badge">{{ color.name }}</div>
             </div>
             <p class="color-desc">{{ color.shortDesc }}</p>
           </div>

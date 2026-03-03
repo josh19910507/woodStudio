@@ -5,7 +5,9 @@ import Design from '../src/views/Design.vue'
 import Construction from '../src/views/Construction.vue'
 import QA from '../src/views/QA.vue'
 const routes = [
-  { path: '/', component: Door },
+  { path: '/', component: Door, 
+    meta: { title: 'wood - 鼎揚匠心木作' }
+  },
   { path: '/BigDoor', component: BigDoor },
   { path: '/Design', component: Design },
   { path: '/Construction', component: Construction },
