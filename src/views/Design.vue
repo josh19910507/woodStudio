@@ -260,8 +260,10 @@ const getImageUrl = (name) => new URL(`../assets/images/${name}`, import.meta.ur
 
 <style scoped>
 .product-page {
-  font-family: 'Noto Sans TC', sans-serif;
-  color: #333;
+  font-family: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+  color: #3c2f25;
+  line-height: 1.6;
+  background: #fafaf8;
 }
 
 /* Hero Banner */
@@ -596,7 +598,7 @@ const getImageUrl = (name) => new URL(`../assets/images/${name}`, import.meta.ur
 }
 
 .lightbox-image {
-  max-width: 100%;
+  max-width: 120%;
   max-height: 50vh;
   object-fit: contain;
   border-radius: 8px;

@@ -147,7 +147,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.product-page {
+  font-family: 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+  color: #3c2f25;
+  line-height: 1.6;
+  background: #c4aa8d;
+}
 .steps-section {
   padding: 6rem 1rem;
   background: linear-gradient(to bottom, #f8f5f1, #ffffff);

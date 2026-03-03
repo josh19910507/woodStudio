@@ -1129,7 +1129,7 @@ transform: scale(1.03);
   }
 
   .hero-description {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .section-header h2 {
@@ -1144,11 +1144,18 @@ transform: scale(1.03);
   .carousel-btn {
     width: 44px;
     height: 44px;
+    color: #b48a60;
+    flex-shrink: 0;
   }
-
+  .carousel-btn:active {
+  background: linear-gradient(135deg, #b48a60, #a47a53);
+  color: #fff;
+  }
   .carousel-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  flex-shrink: 0;
   }
 
   .product-card {
@@ -1181,12 +1188,16 @@ transform: scale(1.03);
   .hero-banner {
     height: 70vh;
   }
+ .carousel-btn svg {
+    width: 24px;
+    height: 24px;
+  }
 
   .hero-title {
     font-size: 2.5rem;
   }
 .hero-description {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   margin-bottom: 2.5rem;
   opacity: 0.95;
   font-weight: 300;

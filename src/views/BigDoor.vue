@@ -783,6 +783,7 @@ const getImageUrl = (name) => {
 .carousel-btn svg {
   width: 24px;
   height: 24px;
+  flex-shrink: 0;
 }
 
 .carousel-btn:hover:not(:disabled) {
